@@ -1,0 +1,202 @@
+% Theorem-like environments
+
+\newtheorem{Theorem}{Theorem}
+\newtheorem{Theorem*}{Theorem}
+
+\newtheorem{Claim}[Theorem]{Claim}
+\newtheorem{Claim*}[Theorem]{Claim}
+\newtheorem{Corollary}[Theorem]{Corollary}
+\newtheorem{Conjecture}[Theorem]{Conjecture}
+\newtheorem{CounterExample*}{$\overline{\hbox{\bf Example}}$}
+\newtheorem{Definition}[Theorem]{Definition}
+\newtheorem{Example}[Theorem]{Example}
+\newtheorem{Example*}[Theorem]{Example}
+\newtheorem{Exercise}[Theorem]{Exercise}
+\newtheorem{Intuition*}[Theorem]{Intuition}
+\newtheorem{Joke*}[Theorem]{Joke}
+\newtheorem{Lemma}[Theorem]{Lemma}
+\newtheorem{Lemma*}[Theorem]{Lemma}
+\newtheorem{Open problem}[Theorem]{Open problem}
+\newtheorem{Proposition}[Theorem]{Proposition}
+\newtheorem{Property}[Theorem]{Property}
+\newtheorem{Question}[Theorem]{Question}
+\newtheorem{Question*}[Theorem]{Question}
+\newtheorem{Remark}[Theorem]{Remark}
+\newtheorem{Result}[Theorem]{Result}
+\newtheorem{Fact}[Theorem]{Fact}
+\newtheorem{Condition}[Theorem]{Condition}
+
+\newcommand{\ed}{\stackrel{\mathrm{def}}{=}}
+%\newcommand{\edef}{\stackrel{\mathrm{def}}{=}}
+\def \Paren#1{{\left({#1}\right)}}
+
+\newcommand{\probof}[1]{\Pr\Paren{#1}}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem*{corollary*}{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{lemma}[theorem]{Lemma}
+%\newtheorem*{lemma*}{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+
+\newcommand{\Xon}{X_1^n}
+
+
+\newcommand{\prob}{{\rm Pr}}
+\newcommand{\Probof}[1]{\prob\left(#1\right)}
+
+
+
+\newcommand{\ignore}[1]{}
+
+% Equation formatting
+
+\newcommand{\spreqn}[1]{{\qquad\text{#1}\qquad}}
+
+% Blackboard fonts
+\newcommand{\II}{\mathbb{I}} % Added by Theertha on April 16th 2013.
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\PP}{\mathbb{P}}
+
+% Number sets
+
+\newcommand{\complex}{\CC}
+\newcommand{\integers}{\ZZ}
+\newcommand{\naturals}{\NN}
+\newcommand{\positives}{\PP}
+\newcommand{\rationals}{\QQ}
+\newcommand{\reals}{\RR}
+
+\newcommand{\realsge}{{\reals_{\ge}}}
+\newcommand{\realsp}{\reals^+}
+\newcommand{\integersp}{\integers^+}
+\newcommand{\integerss}[1]{\integers_{\ge{#1}}}
+
+% boldface
+
+\def \ba     {{\bf a}}
+\def \bx     {{\bf x}}
+\def \by     {{\bf y}}
+
+\def \bA     {{\bf A}}
+\def \bB     {{\bf B}}
+\def \bC     {{\bf C}}
+\def \bD     {{\bf D}}
+\def \bF     {{\bf F}}
+\def \bG     {{\bf G}}
+\def \bL     {{\bf L}}
+\def \bQ     {{\bf Q}}
+\def \bR     {{\bf R}}
+\def \bS     {{\bf S}}
+\def \bT     {{\bf T}}
+\def \bX     {{\bf X}}
+\def \bY     {{\bf Y}}
+\def \bZ     {{\bf Z}}
+
+% caligraphics
+
+\def \cA     {{\cal A}}
+\def \cB     {{\cal B}}
+\def \cC     {{\cal C}}
+\def \cD     {{\cal D}}
+\def \cE     {{\cal E}}
+\def \cF     {{\cal F}}
+\def \cG     {{\cal G}}
+\def \cH     {{\cal H}}
+\def \cI     {{\cal I}}
+\def \cK     {{\cal K}}
+\def \cL     {{\cal L}}
+\def \cM     {{\cal M}}
+\def \cN     {{\cal N}}
+\def \cO     {{\cal O}}
+\def \cP     {{\cal P}}
+\def \cQ     {{\cal Q}}
+\def \cR     {{\cal R}}
+\def \cS     {{\cal S}}
+\def \cT     {{\cal T}}
+\def \cU     {{\cal U}}
+\def \cV     {{\cal V}}
+\def \cW     {{\cal W}}
+\def \cX     {{\cal X}}
+\def \cY     {{\cal Y}}
+\def \cZ     {{\cal Z}}
+
+% vectors
+
+\def \vct#1{{\overline{#1}}}
+
+\def \vcta  {{\vct a}}
+\def \vctb  {{\vct b}}
+\def \vctq  {{\vct q}}
+\def \vcts  {{\vct s}}
+\def \vctu  {{\vct u}}
+\def \vctv  {{\vct v}}
+\def \vctx  {{\vct x}}
+\def \vcty  {{\vct y}}
+\def \vctz  {{\vct z}}
+\def \vctp  {{\vct p}}
+
+\def \vctV  {{\vct V}}
+\def \vctX  {{\vct X}}
+\def \vctY  {{\vct Y}}
+\def \vctZ  {{\vct Z}}
+
+\def \vctbeta  {{\vct\beta}}
+
+
+
+% qed's --  Also consider \qedhere
+
+\def \eqed    {\eqno{\qed}}
+\def \rqed    {\hbox{}~\hfill~$\qed$}
+
+% sequences
+
+\def \upto  {{,}\ldots{,}}
+
+\def \zn    {0\upto n}
+\def \znmo  {0\upto n-1}
+\def \znpo  {0\upto n+1}
+\def \ztnmo {0\upto 2^n-1}
+\def \ok    {1\upto k}
+\def \on    {1\upto n}
+\def \onmo  {1\upto n-1}
+\def \onpo  {1\upto n+1}
+
+% sets
+
+\def \sets#1{{\{#1\}}}
+\def \Sets#1{{\left\{#1\right\}}}
+
+\def \set#1#2{{\sets{{#1}\upto{#2}}}}
+
+\def \setpmo   {\sets{\pm 1}}
+\def \setmpo   {\{-1{,}1\}}
+\def \setzo    {\{0{,}1\}}
+\def \setzn    {\{\zn\}}
+\def \setznmo  {\{\znmo\}}
+\def \setztnmo {\{\ztnmo\}}
+\def \setok    {\{\ok\}}
+\def \seton    {\{\on\}}
+\def \setonmo  {\{\onmo\}}
+\def \setzon   {\setzo^n}
+\def \setzos   {\setzo^*}
+
+
+% Set operations
+
+
+
+\def\ignore#1{}
+

@@ -1,0 +1,141 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,latexsym,bbm,xspace,graphicx,float,mathtools,
+verbatim, xcolor} 
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\newcommand{\new}[1]{\textcolor{red}{#1}}
+%\usepackage{psfig}
+
+\newcommand{\future}[1]{\textcolor{red}{#1}}
+
+\newcommand{\hP}{\hat P}
+\newcommand{\hp}{\hat p}
+
+\newcommand{\Dk}{\Delta_k}
+\newcommand{\Px}{P(x)}
+\newcommand{\Qx}{Q(x)}
+\newcommand{\Nx}{N_x}
+
+\newcommand{\Py}{P(y)}
+\newcommand{\Qy}{Q(y)}
+\newcommand{\Pml}{P_{ML}}
+\newcommand{\Pmlx}{\Pml(x)}
+\newcommand{\Pbeta}{P_{\beta}}
+\newcommand{\Pbetax}{\Pbeta(x)}
+
+
+\newcommand{\dTV}[2]{d_{TV} (#1,#2)}
+\newcommand{\dKL}[2]{D(#1||#2)}
+\newcommand{\chisq}[2]{\chi^2(#1,#2)}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\nPepsp}[1]{n^*(#1, \eps)}
+\newcommand{\nPeps}{\nPepsp{\cP}}
+
+
+\newcommand{\sumX}{\sum_{x\in\cX}}
+
+\newcommand{\Bpr}[1]{Bern(#1)}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\input{glodef} 
+
+\title{Assignment Four\\ ECE 4200}
+\date{}
+\begin{document}
+\maketitle 
+
+\begin{itemize}
+\item
+Provide credit to \textbf{any sources} other than the course staff that helped you solve the problems. This includes \textbf{all students} you talked to regarding the problems. 	
+\item
+You can look up definitions/basics online (e.g., wikipedia, stack-exchange, etc).
+\item
+{\bf The due date is 3/01/2020, 23.59.59 ET}. 
+\item
+Submission rules are the same as previous assignments.
+\item
+\textbf{Please write your net-id on top of every page. It helps with grading.}
+\end{itemize}
+
+
+
+\begin{problem}{1 (10 points) Different class conditional probabilities}
+Consider a classification problem with features in $\RR^d$, and labels in $\{-1, +1\}$. Consider the class of linear classifiers of the form $(\overrightarrow w, 0)$, namely all the classifiers (hyper planes) that pass through the origin (or $t=0$). Instead of logistic regression, suppose the class probabilities are given by the following function, where $\overrightarrow X\in\RR^d$ are the features:
+\begin{align}
+P\Paren{y=+1|\overrightarrow X, \overrightarrow w} = \frac12\Paren{1+\frac{\overrightarrow w\cdot \overrightarrow X}{\sqrt{1+(\overrightarrow w\cdot \overrightarrow X)^2}}}, 
+\end{align}
+where $\overrightarrow w\cdot \overrightarrow X$ is the dot product between $\overrightarrow w$ and  $\overrightarrow X$. 
+
+Suppose we obtain $n$ examples $(\overrightarrow X_i, y_i)$ for $i=1,\ldots, n$. 
+\begin{enumerate}
+\item 
+Show that the log-likelihood function is
+\begin{align}
+J(\overrightarrow w) = -n\log 2 + \sum_{i=1}^{n} \log \Paren{1+ \frac{y_i (\overrightarrow w\cdot \overrightarrow X_i)}{\sqrt{1+(\overrightarrow w\cdot \overrightarrow X_i)^2}}}.
+\end{align}
+\item
+Compute the gradient and write one step of gradient ascent. Namely fill in the blank:
+\begin{align}
+\overrightarrow w_{j+1} = \overrightarrow w_j + \eta\cdot \underline{\hspace{3cm}}\nonumber
+\end{align}
+\end{enumerate}
+\end{problem}
+
+
+\noindent In \textbf{Problem 2}, and \textbf{Problem 3}, we will study linear regression. We will assume in both the problems that $w^0=0$. (This can be done by translating the features and labels to have mean zero, but we will not worry about it).  For $\overrightarrow w = (w^1, \ldots, w^d)$, and $\overrightarrow X = (\overrightarrow X^1, \ldots, \overrightarrow X^d)$, the regression we want is:
+\begin{align}
+y = w^1 \overrightarrow X^1+\ldots + w^d \overrightarrow X^d = \overrightarrow w\cdot \overrightarrow X.
+\end{align}
+We considered the following regularized least squares objective, which is called as \textbf{Ridge Regression}. For $n$ examples $(\overrightarrow X_i, y_i)$,  
+\[
+J(\overrightarrow w, \lambda) = \sum_{i=1}^n \Paren{y_i -\overrightarrow w\cdot \overrightarrow X_i}^2 +\lambda \cdot \|\overrightarrow w\|_2^2.
+\]	
+ 
+\begin{problem}{2 (10 points) Gradient Descent for regression}\quad
+
+\begin{enumerate}
+\item 
+Instead of using the closed form expression we derived in class, suppose we want to perform gradient descent to find the optimal solution for $J(\overrightarrow w)$. Please compute the gradient of $J$, and write one step of the gradient descent with step size $\eta$. 
+\item
+Suppose we get a new point $\overrightarrow X_{n+1}$, what will the predicted $y_{n+1}$ be when $\lambda\to\infty$? 
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}{3 (15 points) Regularization increases training error}
+In the class we said that when we regularize, we expect to get weight vectors with smaller, but never proved it. We also displayed a plot showing that the training error increases as we regularize more (larger $\lambda$). In this assignment, we will formalize the intuitions rigorously.
+
+Let $0<\lambda_1<\lambda_2$ be two regularizer values. Let $\overrightarrow w_1$, and $\overrightarrow w_2$ be the minimizers of $J(\overrightarrow w, \lambda_1)$, and $J(\overrightarrow w, \lambda_2)$ respectively. 
+
+\begin{enumerate}
+	\item Show that $\|\overrightarrow w_1\|_2^2\ge \|\overrightarrow w_2\|_2^2$. Therefore more regularization implies smaller norm of solution!
+	
+	\textbf{Hint:} Observe that $J(\overrightarrow w_1, \lambda_1)\le J(\overrightarrow w_2, \lambda_1)$, and $J(\overrightarrow w_2, \lambda_2)\le J(\overrightarrow w_1, \lambda_2)$ (why?). 
+	\item Show that the training error for $\overrightarrow w_1$ is less than that of $\overrightarrow w_2$. In other words, show that 
+\[
+\sum_{i=1}^n \Paren{y_i -\overrightarrow w_1\cdot \overrightarrow X_i}^2 \le \sum_{i=1}^n \Paren{y_i -\overrightarrow w_2\cdot \overrightarrow X_i}^2.
+\]
+
+\textbf{Hint:} Use the first part of the problem.
+\end{enumerate}
+
+\end{problem}
+
+
+
+
+\begin{problem}{4 (25 points) Linear and Quadratic Regression}
+Please refer to the Jupyter Notebook in the assignment, and complete the coding part in it!
+You can use sklearn regression package: \url{http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html}
+\end{problem}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,22 @@
+classes = [
+ 'FM',
+ 'OQPSK',
+ 'BPSK',
+ '8PSK',
+ 'AM-SSB-SC',
+ '4ASK',
+ '16PSK',
+ 'AM-DSB-SC',
+ 'QPSK’,
+ 'OOK’]
+
+FM - Frequency Modulation
+OQPSK - Offset Quadrature Phase Shift Keying
+BPSK - Binary Phase Shift Keying
+8PSK - 8 Phase Shift Keying
+AM-SSB-SC - Amplitude Modulation Single Sideband Suppressed Carrier
+4ASK - 4 Amplitude Shift Keying
+16PSK - 16 Phase Shift Keying
+AM-DSB-SC - Amplitude Modulation Double Sideband Suppressed Carrier
+QPSK - Quadrature Phase Shift Keying
+OOK - On-off Keying

@@ -1,0 +1,178 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,latexsym,bbm,xspace,graphicx,float,mathtools,
+verbatim, xcolor,bm} 
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\newcommand{\new}[1]{\textcolor{red}{#1}}
+%\usepackage{psfig}
+\usepackage{pgfplots}
+
+\newcommand{\future}[1]{\textcolor{red}{#1}}
+
+\newcommand{\hP}{\hat P}
+\newcommand{\hp}{\hat p}
+
+\newcommand{\Dk}{\Delta_k}
+\newcommand{\Px}{P(x)}
+\newcommand{\Qx}{Q(x)}
+\newcommand{\Nx}{N_x}
+
+\newcommand{\Py}{P(y)}
+\newcommand{\Qy}{Q(y)}
+\newcommand{\Pml}{P_{ML}}
+\newcommand{\Pmlx}{\Pml(x)}
+\newcommand{\Pbeta}{P_{\beta}}
+\newcommand{\Pbetax}{\Pbeta(x)}
+
+\newcommand{\dTV}[2]{d_{TV} (#1,#2)}
+\newcommand{\dKL}[2]{D(#1||#2)}
+\newcommand{\chisq}[2]{\chi^2(#1,#2)}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\nPepsp}[1]{n^*(#1, \eps)}
+\newcommand{\nPeps}{\nPepsp{\cP}}
+
+
+\newcommand{\sumX}{\sum_{x\in\cX}}
+
+\newcommand{\Bpr}[1]{Bern(#1)}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\input{../glodef} 
+
+\title{Assignment Five\\ ECE 4200}
+\date{}
+
+\begin{document}
+\maketitle 
+
+
+\begin{itemize}
+\item
+Provide credit to \textbf{any sources} other than the course staff that helped you solve the problems. This includes \textbf{all students} you talked to regarding the problems. 	
+\item
+You can look up definitions/basics online (e.g., wikipedia, stack-exchange, etc).
+\item
+{\bf The due date is 3/8/2020, 23.59.59 ET}. 
+\item
+Submission rules are the same as previous assignments.
+\item
+\textbf{Please write your net-id on top of every page. It helps with grading.}
+\end{itemize}
+
+
+
+\begin{problem}{1. (15 points)}
+SVM's obtain \emph{non-linear} decision boundaries by mapping the feature vectors $\overrightarrow X\in \RR^d$ to a possibly high dimensional space via a function $\phi:\RR^d\to\RR^m$, and then finding a linear decision boundary in the new space. 
+
+We also saw that to implement SVM, it suffices to know the kernel function $K(\overrightarrow X_i, \overrightarrow X_j)=\phi(\overrightarrow X_i)\cdot \phi(\overrightarrow X_j)$, without even explicitly specifying the function $\phi$. 
+
+Recall \textbf{Mercer's theorem}. $K$ is a kernel function if and only if for any $n$ vectors, $\overrightarrow X_1\upto \overrightarrow X_n\in \RR^d$, and \textbf{any} real numbers $c_1, \ldots, c_n$, $\sum_{i=1}^n\sum_{j=1}^n c_i c_j K(\overrightarrow X_i, \overrightarrow X_j)\ge0$. 
+
+\begin{enumerate}
+\item 
+Prove the following half of Mercer's theorem (which we showed in class). If $K$ is a kernel then $\sum_{i=1}^n\sum_{j=1}^n c_i c_j K(\overrightarrow X_i, \overrightarrow X_j)\ge0$. 
+\item
+Let $d=1$, and $x,y\in \RR$. Is the function $K(x,y)=x+y$ a kernel? 
+\item 
+Let $d=1$, and $x,y\in\RR$. Is $K(x,y)=xy+1$ a kernel?
+\item
+Suppose $d=2$, namely the original features are of the form $\overrightarrow X_i = [\overrightarrow X^1, \overrightarrow X^2]$. Show that $K(\overrightarrow X, \overrightarrow Y)=(1+\overrightarrow X\cdot \overrightarrow Y)^2$ is a kernel function. This is called as \textbf{quadratic kernel}.
+ 
+(\textbf{Hint}: Find a $\phi:\RR^2\to \RR^m$ (for some $m$) such that $\phi(\overrightarrow X)\cdot \phi(\overrightarrow Y) = (1+\overrightarrow X\cdot \overrightarrow Y)^2$). 
+\item
+Consider the training examples $\langle[0, 1], 1\rangle, \langle[1, 2], 1\rangle,\langle[-1, 2], 1\rangle,\langle[0, 11], 1\rangle, \langle[3, 4], -1\rangle, \langle[-3, 4], -1\rangle,$ $ \langle[1 -1], -1\rangle, \langle[-1, -1], -1\rangle$. We have plotted the data points below.
+\begin{itemize}
+\item
+Is the data \textbf{linearly classifiable} in the original 2-d space? 
+If yes, please come up with \emph{any} linear decision boundary that separates the data.
+If no, please explain why.
+\item 
+Is the data linearly classifiable in the feature space corresponding to the quadratic kernel. 
+If yes, please come up with \emph{any} linear decision boundary that separates the data.
+If no, please explain why.
+\end{itemize}
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+\begin{axis}[
+    axis lines=middle,
+    xmin=-8, xmax=8,
+    ymin=-5, ymax=16,
+    xtick=, ytick=
+]
+\addplot [only marks, mark=x, mark options={red}] table {
+0 1
+1 2
+-1 2   
+0 11
+};
+\addplot [only marks, mark=o, mark options={blue}] table {
+3 4
+-3 4
+1 -1
+-1 -1
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\end{problem}
+
+\begin{problem}{2. (10 points)}
+The Gaussian kernel (also called Radial Basis Function kernel (RBF)) is:
+\[
+K(\overrightarrow X, \overrightarrow Y) = \exp\Paren{-\frac{\|\overrightarrow X-\overrightarrow Y\|_2^2}{2\sigma^2}},
+\]
+where $\overrightarrow X, \overrightarrow Y$ are feature vectors in $d$ dimensions.
+Suppose $d=1$, and $2\sigma^2=1$. 
+\begin{enumerate}
+\item Design a function $\phi:\RR\to \RR^m$ that corresponds to Gaussian kernel for $d=1$, and $2\sigma^2=1$. 
+
+\textbf{Hint:} Use Taylor series expansion for the exponential function. 
+\item What is the value of $m$ you end up with?
+\end{enumerate}
+\end{problem}
+
+\begin{problem}{3. (10 points)}
+Let $f, h_i, 1\leq i\leq n$ be real-valued functions and let $\alpha \in \mathbb{R}^n$. Let $L(z,\bm{\alpha}) = f(z) + \sum\limits_{i=1}^{n} \alpha_i h_i(z)$. In this problem, we will prove that the following two optimization problems are equivalent.
+
+\begin{minipage}{0.45\textwidth}
+\begin{equation}\label{eq:constrained_opti}
+\begin{aligned}
+& \min_z f(z) \\
+& \text{s.t. } h_i(z) \leq 0, \; i = 1, \ldots, n.
+\end{aligned}
+\end{equation} 
+\end{minipage}%
+\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{equation}\label{eq:minmax}
+\min_z \max_{\bm{\alpha} \geq \bm{0}} L(z,\bm{\alpha})
+\end{equation}
+\end{minipage}
+
+Let $(z^*,\alpha^*)$ be the solution of \eqref{eq:minmax} and let $z_p^*$ be the solution of \eqref{eq:constrained_opti}.  Prove that:
+	$$L(z^*, \alpha^*)  = f(z_p^*)$$
+\textbf{Hint}: Use the fact that for any $z$, $\bm{\alpha} \geq \bm{0}$,  $L(z^*,\alpha^*) \geq L(z^*,\alpha)$ and $L(z^*, \alpha^*) \leq L(z,\alpha_z)$, where $\alpha_z = \arg \max_{\alpha \geq \bm{0}} L(z,\alpha)$.
+
+You may follow the following steps but it is not required as long as your proof is correct.
+\begin{enumerate}
+\item Prove that $L(z^*, \alpha^*) \leq f(z_p^*)$
+\item Prove that $L(z^*, \alpha^*) \geq f(z_p^*)$
+\end{enumerate}
+\end{problem}
+
+
+\begin{problem}{4 (25 points) SVM Classification}
+	Please refer to the Jupyter Notebook in the assignment, and complete the coding part in it!
+	You can use sklearn SVM package: \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC}
+\end{problem}
+
+
+\end{document}

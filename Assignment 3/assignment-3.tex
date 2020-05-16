@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb,amsthm,amsfonts,latexsym,bbm,xspace,graphicx,float,mathtools,
+verbatim, xcolor} 
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\newcommand{\new}[1]{\textcolor{red}{#1}}
+%\usepackage{psfig}
+
+\newcommand{\future}[1]{\textcolor{red}{#1}}
+
+\newcommand{\hP}{\hat P}
+\newcommand{\hp}{\hat p}
+
+\newcommand{\Dk}{\Delta_k}
+\newcommand{\Px}{P(x)}
+\newcommand{\Qx}{Q(x)}
+\newcommand{\Nx}{N_x}
+
+\newcommand{\Py}{P(y)}
+\newcommand{\Qy}{Q(y)}
+\newcommand{\Pml}{P_{ML}}
+\newcommand{\Pmlx}{\Pml(x)}
+\newcommand{\Pbeta}{P_{\beta}}
+\newcommand{\Pbetax}{\Pbeta(x)}
+
+
+\newcommand{\dTV}[2]{d_{TV} (#1,#2)}
+\newcommand{\dKL}[2]{D(#1||#2)}
+\newcommand{\chisq}[2]{\chi^2(#1,#2)}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\nPepsp}[1]{n^*(#1, \eps)}
+\newcommand{\nPeps}{\nPepsp{\cP}}
+
+
+\newcommand{\sumX}{\sum_{x\in\cX}}
+
+\newcommand{\Bpr}[1]{Bern(#1)}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\input{glodef} 
+
+\title{Assignment Three\\ ECE 4200}
+\date{}
+
+\begin{document}
+\maketitle 
+
+\begin{itemize}
+\item
+Provide credit to \textbf{any sources} other than the course staff that helped you solve the problems. This includes \textbf{all students} you talked to regarding the problems. 	
+\item
+You can look up definitions/basics online (e.g., wikipedia, stack-exchange, etc)
+\item
+{\bf The due date is 2/23/2020, 23.59.59 Eastern time}. 
+\item
+Submission rules are the same as previous assignments.
+\item
+\textbf{Please write your net-id on top of every page. It helps with grading.}
+\end{itemize}
+
+
+
+\begin{problem}{1 (10 points)}
+Recall that a linear classifier is specified by $(\overrightarrow{w},t)$, where $\overrightarrow{w}\in\RR^d$, and $t\in\RR$,  and a decision rule $\overrightarrow{w}\cdot \overrightarrow{X} \lessgtr t$ for a feature vector $\overrightarrow X\in\RR^d$.  
+
+Recall the perceptron algorithm from the lectures. Suppose $d=2$,  $n=4$, and there are four training examples, given by:
+\begin{center}
+  \begin{tabular}{| c | c | c |}
+ \hline
+$i$ &  feature $\overrightarrow X_i$ & label $y_i$\\
+ \hline
+1 & $(-0.6, 1)$& $-1$\\
+2 & $(-3, -4)$& $-1$\\
+3& $(3, -2)$& $+1$\\
+4&  (0.5, 1)& +1\\\hline
+  \end{tabular}
+\end{center}
+
+\begin{enumerate}
+	\item 
+In the class we started with the the initial $(\overrightarrow w, t)=(\overrightarrow 0,0)$, and derived the convergence of perceptron. In this problem:
+\begin{itemize}
+\item
+Start with the initialization $(\overrightarrow w, t)= ( (0,1), 0)$ (the $x$-axis).
+\item
+Implement the perceptron algorithm \textbf{by hand}. Go over the data-points \textbf{in order}. Output a table of the form below where each row works with one example in some iteration. We have filled in some entries in the first two rows. You need to add rows until no mistakes happen on any example.
+\begin{center}
+  \begin{tabular}{ |l |l | l | l | l | l | l| }
+    \hline
+     starting $\overrightarrow w$  & starting $t$  & features $\overrightarrow X_i$& label $y_i$ & predicted label & new $\overrightarrow w$ & new $t$ \\ \hline
+     $(0,1)$ & 0&  $(-0.6, 1)$ & $-1$ & $\ldots$ & $\ldots$ &$\ldots$ \\ \hline            $\ldots$ & $\ldots$ &$(-3, -4)$ & $-1$ & $\ldots$ & $\ldots$& $\ldots$\\ \hline 
+          $\ldots$ &$\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$ & $\ldots$\\ \hline 
+  \end{tabular}
+\end{center}
+\item
+Draw a 2-d grid. On this grid, mark the four examples (like we do on the board). Draw the line you obtain as the final result. 
+\end{itemize}
+\end{enumerate}
+\end{problem}
+
+
+
+\begin{problem}{2 (10 points)}
+Recall the log-likelihood function for logistic regression:
+\[
+J(\overrightarrow w, t) = \sum_{i=1}^n \log Pr ( y_i|  \overrightarrow X_i, \overrightarrow w, t), 
+\]
+where $Pr ( y_i|  \overrightarrow X_i, \overrightarrow w, t)$ is the same as defined in the class for logistic regression, and $y_i\in\{-1,+1\}$. We will show that this function is concave as a function of $\overrightarrow w, t$.
+\begin{enumerate}
+\item 
+Show that for two real numbers $a, b$, $\exp\Paren{a}+\exp\Paren{b}\ge 2 \exp\Paren{(a+b)/2}$. (Basically this says that exponential function is convex.)
+\item
+Extending this, show that for any vectors $\overrightarrow w_1, \overrightarrow w_2, \overrightarrow x \in\RR^d$, 
+\[
+\exp\Paren{\overrightarrow w_1\cdot \overrightarrow x} + \exp\Paren{\overrightarrow w_2\cdot \overrightarrow x} \ge 2\exp\Paren{\frac{(\overrightarrow w_1 + \overrightarrow w_2)}2 \cdot \overrightarrow x}.
+\]
+\item
+Show that $J(\overrightarrow w, t)$ is concave (you can only show the concavity holds for $\lambda=1/2$). You can show it any way you want. One way is to first show that for any $\overrightarrow w_1, \overrightarrow w_2 \in\RR^d$, and $t_1, t_2\in\RR$,  
+\[
+\frac{1}{2}J(\overrightarrow w_1, t_1)+\frac{1}{2}J(\overrightarrow w_2, t_2) \le J\Paren{\frac{\overrightarrow w_2+\overrightarrow w_2 }2, \frac{t_1+t_2}2}.
+\]
+
+You can use that sum of concave functions are concave. A linear function is both concave and convex. 
+\end{enumerate}
+
+In this problem you can also work with the vector $\overrightarrow w^*$, which is the $d+1$ dimensional vector $(\overrightarrow w, t)$, and the $d+1$ dimensional feature vectors $\overrightarrow X_i^{*} = (\overrightarrow X_i, -1)$, which are the features appended with a $-1$. Just like in class, this can simplify some of the computations by using the fact that $\overrightarrow w\cdot \overrightarrow X_i -t = \overrightarrow w^{*}\cdot \overrightarrow X_i^*$. 
+\end{problem}
+
+
+\begin{problem}{ 3. (15 points)}
+Consider the same set-up as in perceptron, where the features all satisfy $\lvert\overrightarrow X_i \rvert\le 1$, and the training examples are separable with margin $\gamma$. We showed in class that perceptron converges with at most $4/\gamma^2$ updates when initialized to the all all zero vectors, namely to $(\overrightarrow 0, 0)$. Suppose instead the initial start with some initial $(\overrightarrow {w_0}, t_0)$ with $\lvert\lvert \overrightarrow {w_0}\rvert \rvert \le R$, and $|t_0|\le R$. We run the perceptron algorithm with this initialization. Suppose, $(\overrightarrow {w_j}, t_j)$ is the hyperplane after $j$th update. Let $(\overrightarrow{w}_{opt}, t_{opt})$ be the optimal hyperplane. Then, 
+
+
+Similar to what we did in class, assume that the $d+1$ dimensional vector $(\overrightarrow{w}_{opt}, t_{opt})$ satisfies
+\[
+\lvert\lvert(\overrightarrow{w}_{opt}, t_{opt})\rvert\rvert^2 \le 2. 
+\]
+\begin{enumerate}
+\item Show that 
+\[
+(\overrightarrow{w}_{j}, t_{j})\cdot (\overrightarrow{w}_{opt}, t_{opt})\ge j\gamma-2R.
+\]
+\item Show that 
+\[
+(\overrightarrow{w}_{j}, t_{j})\cdot (\overrightarrow{w}_{j}, t_{j})\le 2j+2R^2.
+\]
+\item
+Using these conclude that the number of updates before perceptron converges is at most
+\[
+\frac{4+4R\gamma}{\gamma^2}
+\]
+updates.
+\end{enumerate}
+
+\end{problem}
+
+
+
+\begin{problem}{4 (25 points)}
+See the attached notebook for details.
+\end{problem}
+
+
+
+\end{document}
